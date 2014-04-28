@@ -7,7 +7,7 @@ class IMAPFetcher
     @imap.login(@user.imap_username, @user.imap_password)
   end
 
-  def fetch_recent(count=5)
+  def fetch_recent(date)
     @imap.examine('INBOX')
 
     # Split off into a thread for
@@ -15,9 +15,10 @@ class IMAPFetcher
     # their data
     threads = []
     msgs = []
-    @imap.search(['UNSEEN'])[0..count].map do |mid|
+    @imap.search(['SINCE', date.strftime("%d-%^b-%Y")])[0..1].map do |mid|
       threads << Thread.new do
-        msgs << Mail.new(@imap.fetch(mid, "RFC822")[0].attr["RFC822"])
+        m = @imap.fetch(mid, "RFC822")[0].attr["RFC822"]
+        msgs << Mail.new(m)
       end
     end
     threads.each(&:join)
