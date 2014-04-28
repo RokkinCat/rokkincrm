@@ -1,0 +1,9 @@
+---
+:orm: sequel
+:test: none
+:mock: none
+:script: none
+:renderer: erb
+:stylesheet: sass
+:namespace: Rokkincrm
+:migration_format: number
