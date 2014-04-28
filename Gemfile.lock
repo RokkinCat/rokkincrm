@@ -17,8 +17,11 @@ GEM
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
     mime-types (1.25.1)
+    mini_portile (0.5.3)
     minitest (5.3.3)
     moneta (0.7.20)
+    nokogiri (1.6.1)
+      mini_portile (~> 0.5.0)
     padrino (0.12.1)
       padrino-admin (= 0.12.1)
       padrino-cache (= 0.12.1)
@@ -81,6 +84,8 @@ PLATFORMS
 
 DEPENDENCIES
   erubis (~> 2.7.0)
+  mail
+  nokogiri
   padrino (= 0.12.1)
   pg
   rake
