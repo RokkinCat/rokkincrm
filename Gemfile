@@ -14,7 +14,7 @@ gem 'pg'
 gem 'sequel'
 gem 'nokogiri'
 gem 'mail'
-gem 'shield', git: 'https://github.com/RokkinCat/shield.git'
+gem 'shield', git: 'https://github.com/RokkinCat/shield.git', require: 'shield'
 
 # Padrino Stable Gem
 gem 'padrino', '0.12.1'

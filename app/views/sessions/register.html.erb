@@ -1,0 +1,24 @@
+<div class="container">
+  <br />
+  <div class="row">
+    <div class="well" style="margin: auto; width: 400px; margin-top: 50px;">
+      <h1>RokkinCRM</h1>
+      <form method="POST" action="/register">
+        <input type="hidden" value="<%= session[:csrf] %>" name="authenticity_token" />
+        <% if !@user.errors.empty? %>
+          <div class="alert alert-danger">
+            <%= @user.errors %>
+          </div>
+        <% end %>
+        <div class="form-group"><input type="email" placeholder="Email" name="user[email]" class="form-control" required></div>
+        <div class="form-group"><input type="password" placeholder="Password" name="user[password]" class="form-control" required></div>
+        <div class="form-group"><input type="text" placeholder="IMAP Server (e.g imap.gmail.com)" name="user[server]" class="form-control" required></div>
+        <div class="form-group"><input type="text" placeholder="IMAP Username (e.g meow@rokkincat.com)" name="user[imap_username]" class="form-control" required></div>
+        <div class="form-group"><input type="password" placeholder="IMAP Password" name="user[imap_password]" class="form-control" required></div>
+        <div class="form-group"><input type="submit" value="Register" class="btn btn-block btn-lg btn-primary"/></div>
+      </form>
+      <div class="pull-right"><a href="/">Login</a></div>
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,21 @@
+<div class="container">
+  <br />
+  <div class="row">
+    <div class="well" style="margin: auto; width: 400px; margin-top: 50px;">
+      <h1>RokkinCRM</h1>
+      <form method="POST" action="/">
+        <input type="hidden" value="<%= session[:csrf] %>" name="authenticity_token" />
+        <% if @error %>
+          <div class="alert alert-danger">
+            Invalid username or password
+          </div>
+        <% end %>
+        <div class="form-group"><input type="email" placeholder="Email" name="email" class="form-control" /></div>
+        <div class="form-group"><input type="password" placeholder="Password" name="password" class="form-control" /></div>
+        <div class="form-group"><input type="submit" value="Log in" class="btn btn-block btn-lg btn-primary"/></div>
+        <div class="pull-right"><a href="/register">Register</a></div>
+        <div class="clearfix"></div>
+      </form>
+    </div>
+  </div>
+</div>
