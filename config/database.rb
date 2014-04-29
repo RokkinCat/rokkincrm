@@ -5,3 +5,4 @@ Sequel::Model.db = case Padrino.env
   when :production  then Sequel.connect("postgres://localhost/rokkincrm_production",  :loggers => [logger])
   when :test        then Sequel.connect("postgres://localhost/rokkincrm_test",        :loggers => [logger])
 end
+Sequel::Model.db.extension :pg_array
