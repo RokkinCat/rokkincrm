@@ -1,0 +1,36 @@
+<html>
+<head>
+  <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="StyleSheet" />
+  <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+  <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+</head>
+<body>
+  <br />
+  <div class="container-fluid">
+    <div class="col-md-3">
+      <br />
+      <ul class="nav nav-pills nav-stacked">
+        <% @messages.order(:sent_at).map(&:from).reverse.each do |from| %>
+          <li><a href="#<%= from.gsub(/@/,'at').gsub(/\./,'dot') %>" style="cursor: pointer" data-toggle="tab"><%= from %></a></li>
+        <% end %>
+      </ul>
+    </div>
+    <div class="col-md-9">
+      <div class="tab-content">
+        <% @messages.map(&:from).each do |from| %>
+          <div class="tab-pane" id="<%= from.gsub(/@/,'at').gsub(/\./,'dot') %>">
+            <h3>Client: <%= from %></h3>
+            <% Message.where(from: from).order(Sequel.desc(:sent_at)).each do |message|  %>
+              <pre>
+<strong><%= message.subject %></strong>
+<%= message.sent_at %>
+<%= Nokogiri::HTML(message.body).text %>
+              </pre>
+            <% end %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

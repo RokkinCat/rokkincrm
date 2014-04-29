@@ -12,8 +12,8 @@ task :fetch => :environment do
 
       message_model.subject = NKF.nkf("-mw", message.subject.to_s)
       message_model.message_id = NKF.nkf("-mw",message.message_id.to_s)
-      message_model.from = NKF.nkf("-mw",message.from.to_s)
-      message_model.to = message.to.map(&:to_s).map{|m| NKF.nkf("-mw", m) }
+      message_model.from = NKF.nkf("-mw",message.from[0].to_s)
+      message_model.to = [message.to].flatten.map(&:to_s).map{|m| NKF.nkf("-mw", m) }
       message_model.cc = (message.cc || []).map(&:to_s).map{|m| NKF.nkf("-mw", m) }
       message_model.bcc = (message.bcc || []).map(&:to_s).map{|m| NKF.nkf("-mw", m)}
       message_model.references = ([message.references].flatten).map(&:to_s).map{|m| NKF.nkf("-mw", m) }
