@@ -4,6 +4,7 @@ Sequel.migration do
       primary_key :id
 
       String :message_id
+      String :subject
       String :from
 
       column :to, 'text[]'

@@ -15,9 +15,12 @@ class IMAPFetcher
     # their data
     threads = []
     msgs = []
-    @imap.search(['SINCE', date.strftime("%d-%^b-%Y")])[0..1].map do |mid|
+    @imap.search(['UNDELETED','SENTSINCE', date.strftime("%d-%^b-%Y")]).map do |mid|
       threads << Thread.new do
-        m = @imap.fetch(mid, "RFC822")[0].attr["RFC822"]
+        m = @imap.fetch(mid, "RFC822")
+        next if m.nil?
+        m = m[0] if m.respond_to?(:[])
+        m = m.attr["RFC822"]
         msgs << Mail.new(m)
       end
     end
