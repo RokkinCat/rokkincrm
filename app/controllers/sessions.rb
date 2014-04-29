@@ -5,7 +5,7 @@ Rokkincrm::App.controllers :sessions do
     render "sessions/login"
   end
   post :index, map: "/" do
-    if User.authenticate(params["email"], params["password"])
+    if login(User, params["email"], params["password"])
       redirect "/dashboard"
     else
       @error = true
@@ -26,5 +26,9 @@ Rokkincrm::App.controllers :sessions do
     else
       render "sessions/register"
     end
+  end
+  get :logout, map: "/logout" do
+    logout(User)
+    redirect "/"
   end
 end
