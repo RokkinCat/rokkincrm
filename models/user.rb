@@ -2,6 +2,9 @@ require 'nkf'
 
 class User < Sequel::Model
   include Shield::Model
+
+  one_to_many :messages
+
   def self.fetch(email)
     return first(email: email)
   end
@@ -41,6 +44,8 @@ class User < Sequel::Model
       message_model.sent_at = message.date
       message_model.created_at = Time.now
       message_model.save if message_model.valid?
+
+      self.add_message(message_model)
     end
     self.update(last_fetch: Time.now)
   end
