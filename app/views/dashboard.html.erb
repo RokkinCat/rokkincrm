@@ -7,8 +7,18 @@
 <body>
   <br />
   <div class="container-fluid">
+    <div class="navbar navbar-default">
+      <div class="navbar-header">
+         <a class="navbar-brand" href="#">RokkinCRM</a>
+      </div>
+      <ul class="nav navbar-nav navbar-right">
+        <li><a><%= authenticated(User).email %></a></li>
+        <li><a href="#"><span class="glyphicon glyphicon-repeat"></span> Fetch</a></li>
+        <li><a href="#"><span class="glyphicon glyphicon-off"></span> Log out</a></li>
+        <li>&nbsp;&nbsp;&nbsp;</li>
+      </ul>
+    </div>
     <div class="col-md-3">
-      <br />
       <ul class="nav nav-pills nav-stacked">
         <% @messages.order(:sent_at).map(&:from).reverse.each do |from| %>
           <li><a href="#<%= from.gsub(/@/,'at').gsub(/\./,'dot') %>" style="cursor: pointer" data-toggle="tab"><%= from %></a></li>
