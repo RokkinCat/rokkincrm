@@ -7,8 +7,8 @@ module Rokkincrm
     enable :sessions
 
     get "/dashboard" do
-      authenticated(User).fetch_messages
-      @messages = Message.dataset.where(user_id: authenticated(User).id)
+      current_user.fetch_messages
+      @messages = Message.dataset.where(user_id: current_user.id)
       render "dashboard"
     end
 
