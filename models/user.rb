@@ -40,7 +40,7 @@ class User < Sequel::Model
       message_model.rfc822 = NKF.nkf("-mw",message.raw_source)
       message_model.sent_at = message.date
       message_model.created_at = Time.now
-      message_model.save if message_model.valid?
+      message_model.save if message_model.valid? && !message.ignore?
     end
     self.update(last_fetch: Time.now)
   end
